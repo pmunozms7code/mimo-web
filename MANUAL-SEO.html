@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manual SEO – Mimo Lazos para Mascotas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f14;
+            color: #e8e8f0;
+            line-height: 1.7;
+        }
+
+        /* ── Header ── */
+        .hero {
+            background: linear-gradient(135deg, #1a0530 0%, #2d0a55 50%, #1a0530 100%);
+            border-bottom: 1px solid rgba(247, 85, 145, .25);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(247, 85, 145, .18);
+            border: 1px solid rgba(247, 85, 145, .4);
+            color: #f9c0da;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -.03em;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #f75591;
+        }
+
+        .hero p {
+            color: rgba(255, 225, 240, .75);
+            font-size: 16px;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* ── Índice ── */
+        .toc {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(247, 85, 145, .18);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+
+        .toc h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #f75591;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .toc ol {
+            padding-left: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #c9a0e8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .toc a:hover {
+            color: #f75591;
+        }
+
+        /* ── Secciones ── */
+        .section {
+            margin-bottom: 56px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(247, 85, 145, .18);
+        }
+
+        .section-num {
+            width: 36px;
+            height: 36px;
+            background: #f75591;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -.02em;
+        }
+
+        .section p {
+            color: rgba(220, 200, 240, .85);
+            margin-bottom: 14px;
+            font-size: 15px;
+        }
+
+        .section ul,
+        .section ol {
+            padding-left: 22px;
+            color: rgba(220, 200, 240, .85);
+            font-size: 15px;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+        }
+
+        /* Alertas */
+        .alert {
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 18px 0;
+            font-size: 14px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .alert-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .alert-text strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .alert-info {
+            background: rgba(99, 179, 237, .10);
+            border: 1px solid rgba(99, 179, 237, .30);
+        }
+
+        .alert-warn {
+            background: rgba(246, 173, 85, .10);
+            border: 1px solid rgba(246, 173, 85, .30);
+        }
+
+        .alert-good {
+            background: rgba(72, 187, 120, .10);
+            border: 1px solid rgba(72, 187, 120, .30);
+        }
+
+        .alert-info .alert-text {
+            color: #90cdf4;
+        }
+
+        .alert-warn .alert-text {
+            color: #fbd38d;
+        }
+
+        .alert-good .alert-text {
+            color: #9ae6b4;
+        }
+
+        /* Código inline */
+        code {
+            background: rgba(247, 85, 145, .15);
+            color: #f9c0da;
+            font-size: 13px;
+            padding: 2px 7px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Bloque de código */
+        pre {
+            background: #1a1025;
+            border: 1px solid rgba(247, 85, 145, .20);
+            border-radius: 12px;
+            padding: 20px 24px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #c9a0e8;
+            line-height: 1.6;
+        }
+
+        /* Tabla de pasos */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 16px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 12px;
+            padding: 16px 20px;
+            align-items: flex-start;
+        }
+
+        .step-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .step-text strong {
+            color: #fff;
+            font-size: 15px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .step-text span {
+            font-size: 13px;
+            color: rgba(200, 180, 230, .75);
+        }
+
+        /* Tabla comparativa */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(247, 85, 145, .18);
+            color: #f9c0da;
+            font-weight: 700;
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            padding: 11px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            color: rgba(220, 200, 240, .85);
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, .03);
+        }
+
+        /* Checklist final */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .checklist li span {
+            color: rgba(220, 200, 240, .80);
+        }
+
+        .check {
+            color: #68d391;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Link externo */
+        a.ext {
+            color: #f75591;
+            font-weight: 600;
+        }
+
+        a.ext:hover {
+            text-decoration: underline;
+        }
+
+        /* Separador */
+        hr {
+            border: none;
+            border-top: 1px solid rgba(247, 85, 145, .15);
+            margin: 40px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(200, 175, 225, .45);
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        footer strong {
+            color: #f75591;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="hero-badge">📖 Guía completa</div>
+        <h1>Manual <span>SEO</span> para Mimo</h1>
+        <p>Todo lo que necesitas saber para posicionar tu web en Google, paso a paso, sin tecnicismos.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- ÍNDICE -->
+        <div class="toc">
+            <h2>📋 Índice</h2>
+            <ol>
+                <li><a href="#que-es">¿Qué es el SEO y por qué importa?</a></li>
+                <li><a href="#ya-hecho">Lo que ya está hecho en tu web</a></li>
+                <li><a href="#dominio">Paso 1 – Consigue un dominio propio</a></li>
+                <li><a href="#hosting">Paso 2 – Alojamiento (Hosting)</a></li>
+                <li><a href="#og-image">Paso 3 – Crear la imagen OG (Open Graph)</a></li>
+                <li><a href="#search-console">Paso 4 – Google Search Console</a></li>
+                <li><a href="#google-business">Paso 5 – Google Business Profile</a></li>
+                <li><a href="#pagespeed">Paso 6 – Velocidad de página (PageSpeed)</a></li>
+                <li><a href="#palabras-clave">Paso 7 – Palabras clave y contenido</a></li>
+                <li><a href="#backlinks">Paso 8 – Backlinks o enlaces externos</a></li>
+                <li><a href="#checklist">Checklist final de SEO</a></li>
+            </ol>
+        </div>
+
+        <!-- 0. QUÉ ES SEO -->
+        <div class="section" id="que-es">
+            <div class="section-header">
+                <div class="section-num">0</div>
+                <h2>¿Qué es el SEO y por qué importa?</h2>
+            </div>
+            <p><strong>SEO</strong> (Search Engine Optimization) significa <em>optimización para motores de
+                    búsqueda</em>. Es el conjunto de técnicas que hacen que tu web aparezca en los primeros resultados
+                de Google cuando alguien busca tus productos.</p>
+            <p>Por ejemplo: si alguien en Lima escribe en Google <em>"lazos para mascotas veterinaria"</em> y tu web
+                está bien optimizada, apareces en los primeros resultados. <strong>Gratis.</strong> Sin pagar
+                publicidad.</p>
+            <div class="alert alert-good">
+                <div class="alert-icon">💡</div>
+                <div class="alert-text">
+                    <strong>Dato clave:</strong>
+                    El 75 % de las personas nunca pasa de la primera página de Google. Si no estás en los primeros
+                    resultados, básicamente no existes en internet.
+                </div>
+            </div>
+            <p>El SEO se divide en tres grandes áreas:</p>
+            <table>
+                <tr>
+                    <th>Área</th>
+                    <th>Qué cubre</th>
+                    <th>Dificultad</th>
+                </tr>
+                <tr>
+                    <td><strong>SEO Técnico</strong></td>
+                    <td>Código limpio, velocidad, meta tags, sitemap</td>
+                    <td>✅ Ya hecho</td>
+                </tr>
+                <tr>
+                    <td><strong>SEO On-Page</strong></td>
+                    <td>Palabras clave, títulos, contenido</td>
+                    <td>🟡 Pendiente tú</td>
+                </tr>
+                <tr>
+                    <td><strong>SEO Off-Page</strong></td>
+                    <td>Backlinks, reseñas, menciones externas</td>
+                    <td>🟠 Continuo</td>
+                </tr>
+            </table>
+        </div>
+
+        <hr />
+
+        <!-- 1. YA HECHO -->
+        <div class="section" id="ya-hecho">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <h2>Lo que ya está hecho en tu web</h2>
+            </div>
+            <p>Tu archivo <code>index.html</code> ya incluye todo el SEO técnico implementado:</p>
+            <table>
+                <tr>
+                    <th>Elemento</th>
+                    <th>¿Qué hace?</th>
+                </tr>
+                <tr>
+                    <td><code>meta description</code></td>
+                    <td>El texto que aparece debajo del título en Google. Debe resumir tu negocio en máx. 155 caracteres
+                        y tener palabras clave.</td>
+                </tr>
+                <tr>
+                    <td><code>meta keywords</code></td>
+                    <td>Lista de palabras clave que describen tu negocio. Google ya no las usa directamente, pero otros
+                        buscadores sí.</td>
+                </tr>
+                <tr>
+                    <td><code>meta robots</code></td>
+                    <td>Le dice a Google: "sí, indexa esta página y sigue sus enlaces".</td>
+                </tr>
+                <tr>
+                    <td><code>canonical URL</code></td>
+                    <td>Evita que Google penalice tu web por "contenido duplicado" si la misma página se accede con
+                        diferentes URLs.</td>
+                </tr>
+                <tr>
+                    <td><strong>Open Graph</strong></td>
+                    <td>Cuando alguien comparte el link de tu web en WhatsApp, Facebook o LinkedIn, aparece con imagen
+                        grande, título y descripción en lugar de un link feo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Twitter Card</strong></td>
+                    <td>Lo mismo que Open Graph, pero para Twitter/X.</td>
+                </tr>
+                <tr>
+                    <td><strong>Geo tags</strong></td>
+                    <td>Le dice a Google que tu negocio está en Lima, Perú. Clave para búsquedas locales.</td>
+                </tr>
+                <tr>
+                    <td><strong>Schema.org JSON-LD</strong></td>
+                    <td>Datos estructurados que Google lee para mostrar "Rich Results" (resultados enriquecidos con
+                        estrellas, dirección, teléfono, etc.).</td>
+                </tr>
+                <tr>
+                    <td><strong>robots.txt</strong></td>
+                    <td>Archivo que le dice a Google qué páginas rastrear. El tuyo permite rastreo total.</td>
+                </tr>
+                <tr>
+                    <td><strong>sitemap.xml</strong></td>
+                    <td>Mapa de todas tus páginas. Google lo usa para indexar tu web más rápido.</td>
+                </tr>
+            </table>
+            <div class="alert alert-warn">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-text">
+                    <strong>Importante:</strong>
+                    Todo esto funciona perfecto una vez que tu web esté publicada en un dominio real (ej:
+                    mimomascotas.com). Mientras esté en tu computadora local, Google no puede rastrearla.
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PASO 1: DOMINIO -->
+        <div class="section" id="dominio">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <h2>Paso 1 – Consigue un dominio propio</h2>
+            </div>
+            <p>Un <strong>dominio</strong> es tu dirección en internet (ej: <code>mimomascotas.com</code>). Sin dominio,
+                tu web no puede aparecer en Google.</p>
+            <div class="alert alert-info">
+                <div class="alert-icon">💰</div>
+                <div class="alert-text">
+                    <strong>Costo estimado:</strong>
+                    Entre S/ 40 – S/ 80 por año (US$ 10–20 anuales).
+                </div>
+            </div>
+            <p><strong>¿Dónde comprar un dominio?</strong></p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">🥇</div>
+                    <div class="step-text">
+                        <strong>Namecheap <a class="ext" href="https://namecheap.com"
+                                target="_blank">namecheap.com</a></strong>
+                        <span>El más económico. Recomendado para empezar. Compra el .com o el .pe (peruano).</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🌐</div>
+                    <div class="step-text">
+                        <strong>GoDaddy <a class="ext" href="https://godaddy.com"
+                                target="_blank">godaddy.com</a></strong>
+                        <span>Más conocido, a veces más caro pero con buena interfaz en español.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🇵🇪</div>
+                    <div class="step-text">
+                        <strong>NIC.pe <a class="ext" href="https://www.nic.pe" target="_blank">nic.pe</a></strong>
+                        <span>Para dominios .pe (peruanos). Un dominio .pe transmite más confianza local.</span>
+                    </div>
+                </div>
+            </div>
+            <p><strong>Tip de nombre:</strong> elige algo corto, memorable y que incluya tu marca o producto:
+                <code>mimomascotas.com</code>, <code>mimolazos.com</code> o <code>lazospets.pe</code>.</p>
+        </div>
+
+        <hr />
+
+        <!-- PASO 2: HOSTING -->
+        <div class="section" id="hosting">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <h2>Paso 2 – Alojamiento web (Hosting)</h2>
+            </div>
+            <p>El <strong>hosting</strong> es el servidor donde vas a guardar los archivos de tu web para que todos
+                puedan acceder a ella. Como tu web es HTML/CSS/JS puro, tienes opciones <strong>gratuitas</strong>
+                excelentes.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">⚡</div>
+                    <div class="step-text">
+                        <strong>Netlify <a class="ext" href="https://netlify.com" target="_blank">netlify.com</a> —
+                            GRATIS ✅</strong>
+                        <span>Arrastra tu carpeta del proyecto y en 2 minutos está publicada. Soporta dominio propio.
+                            Perfecto para tu web.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🐙</div>
+                    <div class="step-text">
+                        <strong>GitHub Pages <a class="ext" href="https://pages.github.com"
+                                target="_blank">pages.github.com</a> — GRATIS ✅</strong>
+                        <span>Publicación directa desde un repositorio de GitHub. Ideal si ya usas Git.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-text">
+                        <strong>Vercel <a class="ext" href="https://vercel.com" target="_blank">vercel.com</a> — GRATIS
+                            ✅</strong>
+                        <span>Ultra rápido, CDN global. Igual que Netlify pero con interfaz más técnica.</span>
+                    </div>
+                </div>
+            </div>
+            <p><strong>Cómo publicar en Netlify (el más fácil):</strong></p>
+            <ol>
+                <li>Entra a <a class="ext" href="https://netlify.com" target="_blank">netlify.com</a> y crea una cuenta
+                    gratuita.</li>
+                <li>Haz clic en <strong>"Add new site → Deploy manually"</strong>.</li>
+                <li>Arrastra la carpeta <code>weblazos</code> completa a la pantalla.</li>
+                <li>¡Listo! En 30 segundos tienes una URL pública (ej: <code>mimo-lazos.netlify.app</code>).</li>
+                <li>Conecta tu dominio propio en <strong>"Domain settings"</strong>.</li>
+            </ol>
+            <div class="alert alert-info">
+                <div class="alert-icon">📂</div>
+                <div class="alert-text">
+                    <strong>Recuerda:</strong>
+                    Antes de subir, actualiza en tu <code>index.html</code> todas las URLs que dicen
+                    <code>https://mimomascotas.com/</code> por tu dominio real.
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PASO 3: OG IMAGE -->
+        <div class="section" id="og-image">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <h2>Paso 3 – Crear la imagen OG (Open Graph)</h2>
+            </div>
+            <p>La <strong>imagen OG</strong> es la imagen que aparece cuando alguien comparte tu link en WhatsApp,
+                Facebook, Instagram o LinkedIn. Sin ella, el link se ve feo y sin información. Con ella, parece
+                profesional.</p>
+            <p><strong>Especificaciones técnicas:</strong></p>
+            <ul>
+                <li>Tamaño: <strong>1200 × 630 píxeles</strong></li>
+                <li>Formato: <strong>JPG o PNG</strong></li>
+                <li>Nombre del archivo: <code>og-image.jpg</code></li>
+                <li>Dónde guardarla: en la raíz de tu proyecto (junto a <code>index.html</code>)</li>
+            </ul>
+            <p><strong>Cómo crearla gratis:</strong></p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">🎨</div>
+                    <div class="step-text">
+                        <strong>Canva <a class="ext" href="https://canva.com" target="_blank">canva.com</a> —
+                            GRATIS</strong>
+                        <span>Busca la plantilla "Facebook Ad" (1200×628px). Pon el logo Mimo, fondo lila, texto como
+                            "Lazos para mascotas | Peru" y exporta como JPG.</span>
+                    </div>
+                </div>
+            </div>
+            <p><strong>Contenido sugerido para la imagen:</strong></p>
+            <ul>
+                <li>Logo de Mimo centrado o en esquina</li>
+                <li>Fondo degradado lila/rosa (igual que la web)</li>
+                <li>Texto grande: <em>"Lazos Artesanales para Mascotas"</em></li>
+                <li>Subtexto: <em>"Proveedores de +200 veterinarias en Perú"</em></li>
+                <li>Una foto bonita de un lazo o mascota</li>
+            </ul>
+        </div>
+
+        <hr />
+
+        <!-- PASO 4: SEARCH CONSOLE -->
+        <div class="section" id="search-console">
+            <div class="section-header">
+                <div class="section-num">5</div>
+                <h2>Paso 4 – Google Search Console</h2>
+            </div>
+            <p><strong>Google Search Console</strong> es la herramienta oficial de Google donde puedes ver cómo está
+                indexada tu web, qué búsquedas te llevan tráfico, y enviar el sitemap para que te indexen más rápido. Es
+                <strong>100% gratuita</strong>.</p>
+            <p><strong>Cómo configurarlo (paso a paso):</strong></p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">1️⃣</div>
+                    <div class="step-text">
+                        <strong>Entra a Google Search Console</strong>
+                        <span>Ve a <a class="ext" href="https://search.google.com/search-console"
+                                target="_blank">search.google.com/search-console</a> e inicia sesión con tu cuenta de
+                            Google.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">2️⃣</div>
+                    <div class="step-text">
+                        <strong>Agrega tu propiedad</strong>
+                        <span>Haz clic en "Agregar propiedad" → Elige "Prefijo de URL" → Ingresa tu dominio (ej:
+                            https://mimomascotas.com/).</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3️⃣</div>
+                    <div class="step-text">
+                        <strong>Verifica la propiedad</strong>
+                        <span>Google te dará un archivo HTML para subir a tu hosting, o una meta tag para pegar en tu
+                            index.html. La meta tag es la opción más fácil.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">4️⃣</div>
+                    <div class="step-text">
+                        <strong>Envía el Sitemap</strong>
+                        <span>En el menú lateral ve a "Sitemaps" → Ingresa <code>sitemap.xml</code> → Clic en "Enviar".
+                            Google comenzará a rastrear tu web.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">5️⃣</div>
+                    <div class="step-text">
+                        <strong>Espera 3-7 días</strong>
+                        <span>Google tardará entre 3 y 7 días en indexar tu web por primera vez. Luego verás datos en el
+                            panel.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-good">
+                <div class="alert-icon">📊</div>
+                <div class="alert-text">
+                    <strong>¿Qué puedes ver en Search Console?</strong>
+                    Cuántas veces apareció tu web en Google, cuántos clics recibiste, qué palabras usan para
+                    encontrarte, y si Google encontró errores en tu web.
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PASO 5: GOOGLE BUSINESS -->
+        <div class="section" id="google-business">
+            <div class="section-header">
+                <div class="section-num">6</div>
+                <h2>Paso 5 – Google Business Profile</h2>
+            </div>
+            <p><strong>Google Business Profile</strong> (antes Google My Business) es el perfil que aparece en Google
+                Maps y en el panel derecho de Google cuando alguien busca tu negocio. Es <strong>gratuito</strong> y muy
+                poderoso para negocios locales.</p>
+            <div class="alert alert-good">
+                <div class="alert-icon">🗺️</div>
+                <div class="alert-text">
+                    <strong>Resultado:</strong>
+                    Cuando alguien busque "lazos para mascotas Lima", tu negocio puede aparecer en el mapa con foto,
+                    teléfono, horario y reseñas.
+                </div>
+            </div>
+            <p><strong>Cómo crear tu perfil:</strong></p>
+            <ol>
+                <li>Ve a <a class="ext" href="https://business.google.com" target="_blank">business.google.com</a></li>
+                <li>Haz clic en "Gestionar ahora" y sigue los pasos.</li>
+                <li>Completa <strong>todos</strong> los campos: nombre, categoría ("Tienda de accesorios para
+                    mascotas"), dirección, teléfono (<code>+51 931 697 778</code>), horario, web.</li>
+                <li>Sube fotos de tus productos (lazos) y de tu equipo.</li>
+                <li>Verifica el perfil (Google te envía una tarjeta postal o hace verificación por video).</li>
+            </ol>
+            <p><strong>Tips para un perfil 10/10:</strong></p>
+            <ul>
+                <li>Sube al menos 10 fotos de alta calidad de tus productos.</li>
+                <li>Pide a tus clientes veterinarios que te dejen reseñas de 5 estrellas. Cada reseña sube tu posición
+                    en Maps.</li>
+                <li>Responde siempre a los comentarios.</li>
+                <li>Publica actualizaciones ("posts") con nuevos diseños o promociones.</li>
+            </ul>
+        </div>
+
+        <hr />
+
+        <!-- PASO 6: PAGESPEED -->
+        <div class="section" id="pagespeed">
+            <div class="section-header">
+                <div class="section-num">7</div>
+                <h2>Paso 6 – Velocidad de página (PageSpeed)</h2>
+            </div>
+            <p>Google premia las páginas rápidas con mejor posición. Una web lenta pierde posicionamiento y también
+                pierde visitas: el 53% de usuarios abandona una página si tarda más de 3 segundos en cargar.</p>
+            <p><strong>Cómo medir tu velocidad:</strong></p>
+            <ol>
+                <li>Ve a <a class="ext" href="https://pagespeed.web.dev" target="_blank">pagespeed.web.dev</a></li>
+                <li>Ingresa tu URL y haz clic en "Analizar".</li>
+                <li>Apunta para tener una puntuación de <strong>90+ en desktop</strong> y <strong>70+ en móvil</strong>.
+                </li>
+            </ol>
+            <p><strong>Cosas que ya están optimizadas en tu web:</strong></p>
+            <ul>
+                <li>✅ Preconnect a Google Fonts (fuentes cargan más rápido)</li>
+                <li>✅ Video con <code>autoplay muted loop playsinline</code> (optimizado)</li>
+                <li>✅ CSS externo (no inline) → mejor caché</li>
+            </ul>
+            <p><strong>Optimizaciones adicionales que puedes hacer:</strong></p>
+            <ul>
+                <li>Comprime el video MP4 con <a class="ext" href="https://handbrake.fr" target="_blank">HandBrake</a>
+                    (gratis) antes de subirlo al hosting.</li>
+                <li>Si añades imágenes futuras, úsalas en formato <strong>WebP</strong> (más ligero que JPG).</li>
+                <li>Activa la compresión Gzip en tu hosting (Netlify lo hace automáticamente).</li>
+            </ul>
+        </div>
+
+        <hr />
+
+        <!-- PASO 7: PALABRAS CLAVE -->
+        <div class="section" id="palabras-clave">
+            <div class="section-header">
+                <div class="section-num">8</div>
+                <h2>Paso 7 – Palabras clave y contenido</h2>
+            </div>
+            <p>Las <strong>palabras clave</strong> son los términos que tus clientes escriben en Google. Tu web debe
+                usar esas palabras de forma natural para que Google la muestre cuando alguien las busca.</p>
+            <p><strong>Palabras clave recomendadas para Mimo:</strong></p>
+            <table>
+                <tr>
+                    <th>Palabra clave</th>
+                    <th>Intención de búsqueda</th>
+                    <th>Dificultad</th>
+                </tr>
+                <tr>
+                    <td>lazos para mascotas Perú</td>
+                    <td>Comprar / buscar</td>
+                    <td>🟢 Baja</td>
+                </tr>
+                <tr>
+                    <td>accesorios para perros veterinaria</td>
+                    <td>Buscar proveedor</td>
+                    <td>🟢 Baja</td>
+                </tr>
+                <tr>
+                    <td>proveedor veterinarias Lima</td>
+                    <td>B2B / mayoreo</td>
+                    <td>🟢 Baja</td>
+                </tr>
+                <tr>
+                    <td>lazos artesanales mascotas</td>
+                    <td>Comprar artesanal</td>
+                    <td>🟢 Baja</td>
+                </tr>
+                <tr>
+                    <td>accesorios caninos mayoreo</td>
+                    <td>Mayoreo</td>
+                    <td>🟡 Media</td>
+                </tr>
+                <tr>
+                    <td>tienda accesorios mascotas Lima</td>
+                    <td>Buscar local</td>
+                    <td>🟡 Media</td>
+                </tr>
+            </table>
+            <p><strong>Dónde usar estas palabras en tu web:</strong></p>
+            <ul>
+                <li><strong>Título de la página</strong> (<code>&lt;title&gt;</code>) — ya optimizado.</li>
+                <li><strong>Meta description</strong> — ya optimizada.</li>
+                <li><strong>Encabezados</strong> (<code>h1</code>, <code>h2</code>, <code>h3</code>) — úsalas en los
+                    títulos de secciones.</li>
+                <li><strong>Texto del cuerpo</strong> — de forma natural cada 100-150 palabras.</li>
+                <li><strong>Alt text de imágenes</strong> — describe las imágenes con palabras clave.</li>
+            </ul>
+            <div class="alert alert-warn">
+                <div class="alert-icon">🚫</div>
+                <div class="alert-text">
+                    <strong>No hagas "keyword stuffing":</strong>
+                    Repetir la misma palabra clave demasiadas veces está penalizado por Google. Úsalas de forma natural
+                    en el texto.
+                </div>
+            </div>
+            <p><strong>Herramientas gratuitas para investigar palabras clave:</strong></p>
+            <ul>
+                <li><a class="ext" href="https://trends.google.com" target="_blank">Google Trends</a> – ve qué busca la
+                    gente en Perú.</li>
+                <li><a class="ext" href="https://answerthepublic.com" target="_blank">AnswerThePublic</a> – preguntas
+                    que hace la gente sobre tu tema.</li>
+                <li><a class="ext" href="https://ubersuggest.com" target="_blank">Ubersuggest</a> – volumen de búsqueda
+                    y sugerencias (gratis limitado).</li>
+            </ul>
+        </div>
+
+        <hr />
+
+        <!-- PASO 8: BACKLINKS -->
+        <div class="section" id="backlinks">
+            <div class="section-header">
+                <div class="section-num">9</div>
+                <h2>Paso 8 – Backlinks (enlaces externos)</h2>
+            </div>
+            <p>Un <strong>backlink</strong> es cuando otra web enlaza a la tuya. Google interpreta esto como una
+                "votación de confianza". Cuantos más backlinks de calidad tengas, más sube tu posición.</p>
+            <p><strong>Estrategias para conseguir backlinks (sin pagar):</strong></p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">📇</div>
+                    <div class="step-text">
+                        <strong>Directorios de negocios peruanos</strong>
+                        <span>Regístrate en directorios como PaginasAmarillas.pe, MercadoLibre, OLX. Cada perfil con tu
+                            URL es un backlink.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🤝</div>
+                    <div class="step-text">
+                        <strong>Colaboraciones con veterinarias</strong>
+                        <span>Pide a las clínicas que te compran que pongan un link a tu web en la suya. Un enlace de
+                            una veterinaria es muy valioso.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">📸</div>
+                    <div class="step-text">
+                        <strong>Redes sociales y blogs</strong>
+                        <span>Crea perfiles en Instagram, Facebook y TikTok con tu URL. Comparte contenido de valor
+                            (tips de cuidado de mascotas) y enlaza tu web.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">📰</div>
+                    <div class="step-text">
+                        <strong>Prensa local o blogs de mascotas</strong>
+                        <span>Contacta blogs o influencers de mascotas en Perú para una reseña de tus productos.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- CHECKLIST FINAL -->
+        <div class="section" id="checklist">
+            <div class="section-header">
+                <div class="section-num">✓</div>
+                <h2>Checklist Final de SEO</h2>
+            </div>
+            <p>Usa esta lista para saber exactamente qué has hecho y qué te falta. Márcalos a medida que los completes:
+            </p>
+            <ul class="checklist">
+                <li><span class="check">✅</span><span><strong>SEO técnico del index.html</strong> — Meta tags, Open
+                        Graph, Schema.org, robots.txt, sitemap.xml ya están listos.</span></li>
+                <li><span class="check">✅</span><span><strong>Texto del hero legible</strong> — Contraste mejorado,
+                        sombras de texto reforzadas.</span></li>
+                <li><span class="check">✅</span><span><strong>Menú responsive</strong> — Hamburguesa para móvil
+                        implementada.</span></li>
+                <li><span class="check">⬜</span><span><strong>Dominio propio</strong> — Compra un .com o .pe en
+                        Namecheap o NIC.pe.</span></li>
+                <li><span class="check">⬜</span><span><strong>Hosting activo</strong> — Publica en Netlify, Vercel o
+                        GitHub Pages.</span></li>
+                <li><span class="check">⬜</span><span><strong>Actualizar URLs</strong> — Cambiar todas las URLs de
+                        <code>mimomascotas.com</code> por tu dominio real en el index.html.</span></li>
+                <li><span class="check">⬜</span><span><strong>Imagen OG (og-image.jpg)</strong> — Crear en Canva
+                        (1200×630px) y subir al proyecto.</span></li>
+                <li><span class="check">⬜</span><span><strong>Google Search Console</strong> — Registrar y enviar el
+                        sitemap.xml.</span></li>
+                <li><span class="check">⬜</span><span><strong>Google Business Profile</strong> — Crear perfil con fotos,
+                        horario, teléfono y categoría.</span></li>
+                <li><span class="check">⬜</span><span><strong>Pedir reseñas</strong> — Solicitar a clientes veterinarias
+                        que dejen reseñas de 5 estrellas en Google.</span></li>
+                <li><span class="check">⬜</span><span><strong>PageSpeed &gt; 80</strong> — Probar en pagespeed.web.dev
+                        una vez publicada.</span></li>
+                <li><span class="check">⬜</span><span><strong>Backlinks iniciales</strong> — Registrar en al menos 3
+                        directorios de negocios peruanos.</span></li>
+                <li><span class="check">⬜</span><span><strong>Redes sociales</strong> — Instagram y Facebook con URL de
+                        la web en la bio.</span></li>
+            </ul>
+
+            <div class="alert alert-good" style="margin-top:28px;">
+                <div class="alert-icon">🏆</div>
+                <div class="alert-text">
+                    <strong>Resultado esperado:</strong>
+                    Siguiendo todos estos pasos, en 2–4 meses tu web debería aparecer en la primera página de Google
+                    para búsquedas específicas como "lazos para mascotas Lima" o "proveedor veterinarias Perú". El SEO
+                    es un proceso continuo: cuanto más consistente seas, mejores resultados.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Manual creado especialmente para <strong>Mimo – Lazos para Mascotas</strong> 🎀 &nbsp;|&nbsp; Noelia, fundadora
+    </footer>
+
+</body>
+
+</html>

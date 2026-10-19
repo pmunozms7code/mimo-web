@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía: GitHub + Netlify – Mimo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f14;
+            color: #e8e8f0;
+            line-height: 1.7;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0d1a30 0%, #0a2140 50%, #0d1a30 100%);
+            border-bottom: 1px solid rgba(49, 130, 206, .3);
+            padding: 56px 40px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(49, 130, 206, .18);
+            border: 1px solid rgba(49, 130, 206, .4);
+            color: #90cdf4;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(26px, 3.5vw, 42px);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -.03em;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: #63b3ed;
+        }
+
+        .hero p {
+            color: rgba(200, 220, 255, .7);
+            font-size: 15px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 44px 24px 80px;
+        }
+
+        /* Índice */
+        .toc {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(49, 130, 206, .2);
+            border-radius: 14px;
+            padding: 24px 28px;
+            margin-bottom: 44px;
+        }
+
+        .toc h2 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #63b3ed;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .toc ol {
+            padding-left: 18px;
+        }
+
+        .toc li {
+            margin-bottom: 7px;
+        }
+
+        .toc a {
+            color: #90cdf4;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .toc a:hover {
+            color: #fff;
+        }
+
+        /* Secciones */
+        .section {
+            margin-bottom: 52px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(49, 130, 206, .18);
+        }
+
+        .section-num {
+            width: 32px;
+            height: 32px;
+            background: #2b6cb0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -.02em;
+        }
+
+        .section p {
+            color: rgba(200, 215, 240, .85);
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .section ul,
+        .section ol {
+            padding-left: 20px;
+            color: rgba(200, 215, 240, .85);
+            font-size: 15px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        /* Steps visuales */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 14px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 14px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 12px;
+            padding: 14px 18px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            min-width: 26px;
+            height: 26px;
+            background: #2b6cb0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: #fff;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-text strong {
+            color: #fff;
+            font-size: 15px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .step-text span {
+            font-size: 13px;
+            color: rgba(190, 210, 240, .7);
+        }
+
+        /* Alertas */
+        .alert {
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 14px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .alert-text strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+
+        .alert-info {
+            background: rgba(99, 179, 237, .10);
+            border: 1px solid rgba(99, 179, 237, .30);
+        }
+
+        .alert-warn {
+            background: rgba(246, 173, 85, .10);
+            border: 1px solid rgba(246, 173, 85, .30);
+        }
+
+        .alert-good {
+            background: rgba(72, 187, 120, .10);
+            border: 1px solid rgba(72, 187, 120, .30);
+        }
+
+        .alert-info .alert-text {
+            color: #90cdf4;
+        }
+
+        .alert-warn .alert-text {
+            color: #fbd38d;
+        }
+
+        .alert-good .alert-text {
+            color: #9ae6b4;
+        }
+
+        code {
+            background: rgba(49, 130, 206, .18);
+            color: #90cdf4;
+            font-size: 13px;
+            padding: 2px 7px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background: #0a1628;
+            border: 1px solid rgba(49, 130, 206, .25);
+            border-radius: 12px;
+            padding: 18px 22px;
+            overflow-x: auto;
+            margin: 14px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #90cdf4;
+            line-height: 1.6;
+        }
+
+        pre .comment {
+            color: rgba(150, 180, 220, .5);
+        }
+
+        a.ext {
+            color: #63b3ed;
+            font-weight: 600;
+        }
+
+        a.ext:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(49, 130, 206, .15);
+            margin: 36px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(72, 187, 120, .18);
+            color: #9ae6b4;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 9px;
+            border-radius: 20px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .tag-blue {
+            background: rgba(49, 130, 206, .18);
+            color: #90cdf4;
+        }
+
+        .result-box {
+            background: rgba(72, 187, 120, .08);
+            border: 1px solid rgba(72, 187, 120, .25);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin: 16px 0;
+        }
+
+        .result-box strong {
+            color: #9ae6b4;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .result-box p {
+            color: rgba(190, 240, 210, .8);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 36px 20px;
+            color: rgba(150, 170, 210, .4);
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        footer strong {
+            color: #63b3ed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="hero-badge">🚀 Guía paso a paso</div>
+        <h1>GitHub + <span>Netlify</span></h1>
+        <p>Publica tu web de Mimo en internet en menos de 20 minutos, completamente gratis.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- ÍNDICE -->
+        <div class="toc">
+            <h2>📋 Contenido</h2>
+            <ol>
+                <li><a href="#que-son">¿Qué son GitHub y Netlify?</a></li>
+                <li><a href="#instalar-git">Parte 1 – Instalar Git en tu PC</a></li>
+                <li><a href="#cuenta-github">Parte 2 – Crear cuenta en GitHub</a></li>
+                <li><a href="#subir-github">Parte 3 – Subir tu proyecto a GitHub</a></li>
+                <li><a href="#netlify">Parte 4 – Publicar con Netlify</a></li>
+                <li><a href="#dominio">Parte 5 – Conectar tu dominio propio (opcional)</a></li>
+                <li><a href="#actualizar">Parte 6 – Cómo actualizar tu web en el futuro</a></li>
+            </ol>
+        </div>
+
+        <!-- QUÉ SON -->
+        <div class="section" id="que-son">
+            <div class="section-header">
+                <div class="section-num">0</div>
+                <h2>¿Qué son GitHub y Netlify?</h2>
+            </div>
+            <p><strong>GitHub</strong> es como una "nube" para guardar el código de tu web de forma segura y con
+                historial de cambios. Es gratuito y el estándar de la industria.</p>
+            <p><strong>Netlify</strong> es el servicio que toma tu código de GitHub y lo publica en internet
+                automáticamente. Cada vez que actualizas algo en GitHub, Netlify actualiza tu web en segundos. Todo
+                <strong>gratis</strong>.</p>
+            <div class="result-box">
+                <strong>🔁 El flujo completo:</strong>
+                <p>Tu PC → GitHub (guardar código) → Netlify (publicar en internet) → Visitan tu web</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PARTE 1: GIT -->
+        <div class="section" id="instalar-git">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <h2>Parte 1 – Instalar Git en tu PC <span class="tag">Solo una vez</span></h2>
+            </div>
+            <p><strong>Git</strong> es el programa que conecta tu PC con GitHub. Solo necesitas instalarlo una vez.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <strong>Descarga Git</strong>
+                        <span>Ve a <a class="ext" href="https://git-scm.com/download/win"
+                                target="_blank">git-scm.com/download/win</a> y descarga la versión para Windows. Ejecuta
+                            el instalador y haz clic en "Next" en todas las pantallas (no cambies nada).</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <strong>Verifica la instalación</strong>
+                        <span>Abre el menú Inicio → escribe <code>cmd</code> → Enter. En la ventana negra
+                            escribe:</span>
+                    </div>
+                </div>
+            </div>
+            <pre>git --version</pre>
+            <p>Si aparece algo como <code>git version 2.x.x</code>, está instalado correctamente.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <strong>Configura tu nombre y email (solo una vez)</strong>
+                        <span>En la misma ventana negra, escribe estos dos comandos (cambia los datos por los
+                            tuyos):</span>
+                    </div>
+                </div>
+            </div>
+            <pre>git config --global user.name "Noelia Mimo"
+git config --global user.email "tu@email.com"</pre>
+        </div>
+
+        <hr />
+
+        <!-- PARTE 2: CUENTA GITHUB -->
+        <div class="section" id="cuenta-github">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <h2>Parte 2 – Crear cuenta en GitHub <span class="tag">Solo una vez</span></h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <strong>Regístrate en GitHub</strong>
+                        <span>Ve a <a class="ext" href="https://github.com" target="_blank">github.com</a> → clic en
+                            "Sign up" → registra con tu email → elige el plan <strong>gratuito</strong>.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <strong>Crea un repositorio nuevo</strong>
+                        <span>Una vez dentro de GitHub, haz clic en el botón verde <strong>"New"</strong> o en el icono
+                            <strong>"+"</strong> → "New repository".</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <strong>Configura el repositorio así:</strong>
+                        <span>
+                            • <strong>Repository name:</strong> <code>mimo-web</code><br />
+                            • <strong>Visibilidad:</strong> Public (gratis)<br />
+                            • <strong>NO</strong> marques "Add a README file"<br />
+                            • Clic en <strong>"Create repository"</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <div class="alert-icon">💡</div>
+                <div class="alert-text">
+                    <strong>Guarda la URL de tu repositorio.</strong>
+                    Será algo como: <code>https://github.com/tu-usuario/mimo-web.git</code>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PARTE 3: SUBIR A GITHUB -->
+        <div class="section" id="subir-github">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <h2>Parte 3 – Subir tu proyecto a GitHub</h2>
+            </div>
+            <p>Ahora vamos a conectar tu carpeta <code>weblazos</code> con GitHub desde la terminal.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <strong>Abre la terminal EN tu carpeta del proyecto</strong>
+                        <span>En el Explorador de Windows, navega hasta tu carpeta <code>weblazos</code>. Luego en la
+                            barra de direcciones escribe <code>cmd</code> y presiona Enter. Se abrirá la terminal ya
+                            dentro de esa carpeta.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <div class="alert-icon">📂</div>
+                <div class="alert-text">
+                    <strong>Ruta de tu proyecto:</strong>
+                    <code>C:\Users\pmuno\OneDrive\Escritorio\Proyectosweb\weblazos</code>
+                </div>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <strong>Inicializa Git en la carpeta</strong>
+                        <span>Escribe el siguiente comando y presiona Enter:</span>
+                    </div>
+                </div>
+            </div>
+            <pre>git init</pre>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <strong>Agrega todos tus archivos</strong>
+                    </div>
+                </div>
+            </div>
+            <pre>git add .</pre>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">
+                        <strong>Crea tu primer "commit" (punto de guardado)</strong>
+                    </div>
+                </div>
+            </div>
+            <pre>git commit -m "Primer subida del proyecto Mimo"</pre>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-text">
+                        <strong>Conecta con tu repositorio de GitHub</strong>
+                        <span>Reemplaza <code>tu-usuario</code> por tu nombre de usuario de GitHub:</span>
+                    </div>
+                </div>
+            </div>
+            <pre>git remote add origin https://github.com/tu-usuario/mimo-web.git
+git branch -M main</pre>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-text">
+                        <strong>Sube los archivos a GitHub</strong>
+                    </div>
+                </div>
+            </div>
+            <pre>git push -u origin main</pre>
+            <p>La primera vez te pedirá iniciar sesión con tu cuenta de GitHub. Sigue las instrucciones en pantalla
+                (puede abrirse una ventana del navegador para autorizar).</p>
+            <div class="result-box">
+                <strong>✅ ¿Cómo saber si funcionó?</strong>
+                <p>Ve a <code>https://github.com/tu-usuario/mimo-web</code> en el navegador. Debes ver todos tus
+                    archivos listados ahí.</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PARTE 4: NETLIFY -->
+        <div class="section" id="netlify">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <h2>Parte 4 – Publicar con Netlify <span class="tag-blue tag">¡Gratis!</span></h2>
+            </div>
+            <p>Con el código en GitHub, publicar en Netlify tarda menos de 5 minutos.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <strong>Crea cuenta en Netlify</strong>
+                        <span>Ve a <a class="ext" href="https://netlify.com" target="_blank">netlify.com</a> → clic en
+                            <strong>"Sign up"</strong> → elige <strong>"Sign up with GitHub"</strong>. Esto conecta
+                            Netlify con tu cuenta de GitHub directamente.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <strong>Agrega un nuevo sitio</strong>
+                        <span>En el panel de Netlify, haz clic en <strong>"Add new site"</strong> → <strong>"Import an
+                                existing project"</strong>.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <strong>Conecta con GitHub</strong>
+                        <span>Elige <strong>"Deploy with GitHub"</strong>. Netlify te pedirá permiso para acceder a tus
+                            repositorios. Acepta.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">
+                        <strong>Selecciona tu repositorio</strong>
+                        <span>Busca y selecciona <strong>mimo-web</strong> de la lista.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-text">
+                        <strong>Configura el deploy</strong>
+                        <span>Netlify detectará que es un proyecto HTML simple. Deja todo como está:<br />
+                            • Branch to deploy: <code>main</code><br />
+                            • Build command: <em>(vacío)</em><br />
+                            • Publish directory: <code>/</code> o <em>(vacío)</em><br />
+                            Clic en <strong>"Deploy mimo-web"</strong>.
+                        </span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-text">
+                        <strong>¡Espera 30-60 segundos!</strong>
+                        <span>Netlify desplegará tu web. Al terminar verás un link como:
+                            <code>https://mimo-lazos.netlify.app</code></span>
+                    </div>
+                </div>
+            </div>
+            <div class="result-box">
+                <strong>🎉 ¡Tu web está en internet!</strong>
+                <p>Comparte ese link con quien quieras. Ya es pública y accesible desde cualquier parte del mundo.</p>
+            </div>
+
+            <div class="alert alert-warn">
+                <div class="alert-icon">✏️</div>
+                <div class="alert-text">
+                    <strong>Cambia el nombre del subdominio (opcional):</strong>
+                    En Netlify → "Site settings" → "Domain management" → "Options" → "Edit site name". Puedes poner algo
+                    como <code>mimo-mascotas</code> y quedará <code>mimo-mascotas.netlify.app</code>.
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PARTE 5: DOMINIO -->
+        <div class="section" id="dominio">
+            <div class="section-header">
+                <div class="section-num">5</div>
+                <h2>Parte 5 – Conectar tu dominio propio <span class="tag">Opcional</span></h2>
+            </div>
+            <p>Si compraste un dominio propio (ej: <code>mimomascotas.com</code>), estos son los pasos para conectarlo a
+                Netlify:</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <strong>En Netlify: agrega tu dominio</strong>
+                        <span>Ve a tu sitio en Netlify → "Site settings" → "Domain management" → "Add domain" → escribe
+                            tu dominio → "Verify" → "Add domain".</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <strong>Netlify te dará 4 "nameservers"</strong>
+                        <span>Se verán así: <code>dns1.p04.nsone.net</code>, <code>dns2.p04.nsone.net</code>,
+                            etc.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <strong>En tu proveedor de dominio (Namecheap/GoDaddy): cambia los nameservers</strong>
+                        <span>Entra al panel donde compraste el dominio → busca "Nameservers" o "DNS" → cambia los
+                            nameservers por los que te dio Netlify → guarda.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">
+                        <strong>Espera 24-48 horas</strong>
+                        <span>Los cambios de DNS tardan en propagarse. Netlify también activará HTTPS (certificado SSL
+                            gratuito) automáticamente.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-good">
+                <div class="alert-icon">🔒</div>
+                <div class="alert-text">
+                    <strong>Netlify incluye HTTPS gratis:</strong>
+                    Tu web tendrá el candado verde de seguridad (<code>https://</code>) automáticamente. Esto también
+                    ayuda al SEO.
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- PARTE 6: ACTUALIZAR -->
+        <div class="section" id="actualizar">
+            <div class="section-header">
+                <div class="section-num">6</div>
+                <h2>Parte 6 – Cómo actualizar tu web en el futuro</h2>
+            </div>
+            <p>Cada vez que hagas cambios en tu web y quieras que se vean en internet, solo tienes que ejecutar
+                <strong>3 comandos</strong> en la terminal de tu carpeta:</p>
+            <pre><span class="comment"># 1. Agregar todos los cambios</span>
+git add .
+
+<span class="comment"># 2. Guardar con un mensaje descriptivo</span>
+git commit -m "Descripción de lo que cambiaste"
+
+<span class="comment"># 3. Subir a GitHub (Netlify actualiza automáticamente)</span>
+git push</pre>
+            <div class="result-box">
+                <strong>⚡ Netlify detecta el push automáticamente</strong>
+                <p>En menos de 60 segundos tu web estará actualizada. No tienes que hacer nada más en Netlify.</p>
+            </div>
+            <p><strong>Ejemplos de mensajes de commit:</strong></p>
+            <pre>git commit -m "Agrego nueva sección de colección"
+git commit -m "Corrijo texto de la sección Nosotros"
+git commit -m "Actualizo número de WhatsApp"</pre>
+            <div class="alert alert-info">
+                <div class="alert-icon">💡</div>
+                <div class="alert-text">
+                    <strong>Tip:</strong>
+                    Cada commit es un punto en el tiempo al que puedes volver si algo sale mal. Por eso es importante
+                    ponerles mensajes descriptivos.
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <!-- RESUMEN FINAL -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-num">✓</div>
+                <h2>Resumen del flujo completo</h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text"><strong>Instalar Git</strong><span>git-scm.com → instalar → configurar nombre
+                            y email</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text"><strong>Crear cuenta GitHub</strong><span>github.com → repositorio "mimo-web"
+                            público</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text"><strong>Subir proyecto</strong><span><code>git init</code> →
+                            <code>git add .</code> → <code>git commit</code> → <code>git push</code></span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text"><strong>Publicar en Netlify</strong><span>netlify.com → Import GitHub →
+                            seleccionar mimo-web → Deploy</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-text"><strong>Dominio propio</strong><span>Agregar dominio en Netlify → cambiar
+                            nameservers → esperar 48h</span></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-text"><strong>Futuras actualizaciones</strong><span><code>git add .</code> →
+                            <code>git commit -m "..."</code> → <code>git push</code> → listo</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Guía creada para <strong>Mimo – Lazos para Mascotas</strong> 🎀 &nbsp;|&nbsp; Noelia, fundadora
+    </footer>
+
+</body>
+
+</html>
